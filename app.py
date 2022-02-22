@@ -1,27 +1,68 @@
-#Import flask dependency
-from flask import Flask
+#Import dependencies
+import datetime as dt
+import numpy as np
+import pandas as pd
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+from flask import Flask, jsonify
+
+#Set up database engine
+engine = create_engine("sqlite:///hawaii.sqlite")
+
+#Reflect database into classes
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+
+#Variables to reflect databases later
+Measurement = Base.classes.measurement
+Station = Base.classes.station
+
+#Create session link from Python
+session = Session(engine)
 
 #Create new flask app instance
 app = Flask(__name__)
 
-#Create flask routes##
-#Create starting point known as the root##
-#@app.route('/')
 
-#Create function called hello world after root##
-#def hello_world():
-    #return 'Hello world'
-
-#Whole code:
+#################
+##WELCOME ROUTE##
+#################
 @app.route('/')
 def welcome():
     return(
-    '''
-    Welcome to the Climate Analysis API!
-    Available Routes:
-    /api/v1.0/precipitation
-    /api/v1.0/stations
-    /api/v1.0/tobs
-    /api/v1.0/temp/start/end
-    ''')
+     f"Welcome to the Hawaii Climate Analysis API!<br/>"
+        f"Available Routes:<br/>"
+        f"/api/v1.0/precipitation<br/>"
+        f"/api/v1.0/stations<br/>"
+        f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/temp/start/end"
+    )
+
+##############################
+#### PRECIPITATION ROUTE #####
+##############################
+@app.route("/api/v1.0/precipitation")
+def precipitation():
+   prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
+   precipitation = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= prev_year).all()
+   precip = {date: prcp for date, prcp in precipitation}
+   return jsonify(precip)
+  
+
+##############################
+#### STATIONS ROUTE ##########
+##############################
+@app.route("/api/v1.0/stations")
+def stations():
+   results = session.query(Station.station).all()
+   stations = list(np.ravel(results))
+   return jsonify(stations=stations)
+
+
+####################################
+#### MONTHLY TEMPERATURE ROUTE #####
+####################################  
+
 
