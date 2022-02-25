@@ -10,7 +10,7 @@ Using SQLite and SQLalchemy to retrieve and store weather data, the following we
 3. There is a larger difference, or wider temperature range for the month of December between the minimum temperature (56 F) and the average temperature in the first quartile (69 F) compared to the month of June where minimum temperature (64 F) is closer to the average temperature in the first quartile (73 F).
 
 ##### Figure 1a. June Average Temperatures
-[!June Summary](June Summary.png)
+![June Summary](June Summary.png)
 
 ### Additional queries to consider
 To get a better understanding of the weather patterns between the months of June and December, I recommend running additional queries on data pertaining to rain fall per month and the relative humidity per month. Both weather conditions have significant impact on the success of opening a surf and ice cream shop.
