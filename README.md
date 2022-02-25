@@ -12,4 +12,4 @@ Using SQLite and SQLalchemy to retrieve and store weather data, the following we
 ##### Figure 1b. December Average Temperature Statistical Summary
 ![December_summary](December_summary.png)
 ### Additional queries to consider
-To get a better understanding of the weather patterns between the months of June and December, I recommend running additional queries on data pertaining to rain fall per month and the relative humidity per month. Both weather conditions have significant impact on the success of opening a surf and ice cream shop.
+To get a better understanding of the weather patterns between the months of June and December, I recommend running additional queries on data pertaining to precipitation per month and the relative humidity per month. Both weather conditions will have significant impact on the success of opening a surf and ice cream shop.
